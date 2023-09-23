@@ -17,7 +17,7 @@ Citizen.CreateThread(function()
         local playerCoords = GetEntityCoords(playerPed)
         local vehicle = GetClosestVehicle(playerCoords, 10.0, 0, 391551)
 
-        if DoesEntityExist(vehicle) and not IsEntityDead(playerPed) then
+        if DoesEntityExist(vehicle) and not IsEntityDead(playerPed) and IsEntityInWater(vehicle) then
             playerWait = 5
             local vehicleModel = GetDisplayNameFromVehicleModel(GetEntityModel(vehicle))
 
