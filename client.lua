@@ -13,10 +13,11 @@ end
 Citizen.CreateThread(function()
     while true do
         local playerWait = 1000
-        local playerCoords = GetEntityCoords(PlayerPedId())
+        local playerPed = PlayerPedId()
+        local playerCoords = GetEntityCoords(playerPed)
         local vehicle = GetClosestVehicle(playerCoords, 10.0, 0, 391551)
 
-        if DoesEntityExist(vehicle) then
+        if DoesEntityExist(vehicle) and not IsEntityDead(playerPed) then
             playerWait = 5
             local vehicleModel = GetDisplayNameFromVehicleModel(GetEntityModel(vehicle))
 
@@ -29,7 +30,7 @@ Citizen.CreateThread(function()
                 if Config.DrawMarker then
                     DrawMarker(1, offsetCoords, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Config.Marker.size.x, Config.Marker.size.y, Config.Marker.size.z, Config.Marker.color.r, Config.Marker.color.g, Config.Marker.color.b, Config.Marker.color.a, false, true, 2, false, false, false, false)
                 end
-                
+
                 if distance < 1.0 then
                     local isBoatAnchored = IsBoatAnchoredAndFrozen(vehicle)
 
